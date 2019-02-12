@@ -1,34 +1,57 @@
-const Header = () =>
+const players = [
+    {
+    name: "Jay",
+    score: 50,
+    id: 1
+  },
+  {
+    name: "Logan",
+    score: 85,
+    id: 2
+  },
+  {
+    name: "Flash",
+    score: 95,
+    id: 3
+  },
+  {
+    name: "Gambit",
+    score: 80,
+    id: 4
+  }
+]
+
+const Header = (props) =>
         <header>
-            <h1>Scoreboard</h1>
-            <span className="stats">Players: 1</span>
+            <h1>{ props.title }</h1>
+            <span className="stats">Players: { props.totalPlayers }</span>
         </header>
 
-const Player = () => 
+const Player = (props) => 
         <div className="player">
             <span className="player-name">
-                Jay
+                { props.name }
             </span>
-            <Counter />
+            <Counter score={ props.score }/>
         </div>
 
-const Counter = () =>
+const Counter = (props) =>
     <div className="counter">
         <button className="counter-action decrement"> - </button>
-        <span className="counter-score">35</span>
+        <span className="counter-score"> { props.score } </span>
         <button className="counter-action increment"> + </button>
     </div>
 
-const App = () =>
+const App = (props) =>
     <div className="scoreboard">
-        <Header />
+        <Header title="Scoreboard" totalPlayers={ props.initialPlayers.length } />
 
         {/* Players list*/}
 
-        <Player />
+        {props.initialPlayers.map( player => <Player name={ player.name } score={ player.score } key={ player.id.toString() } /> )}
     </div>
 
 ReactDOM.render(
-    <App />,
+    <App initialPlayers={ players }/>,
     document.getElementById('root')
 )
