@@ -1,1 +1,3 @@
-# react_scoreboard
+# React Scoreboard
+
+Sample React app which displays a scoreboard.
